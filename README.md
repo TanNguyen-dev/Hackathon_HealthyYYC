@@ -22,8 +22,7 @@ HealthyYYC is a web application aimed at promoting healthy eating habits and ass
 ## Usage
 To access the web version of HealthyYYC, users can visit the provided link. Additionally, for running the demo website, users need to attach the following API keys:
 
-- **Google API Key**: `AIzaSyA2o22oAQod55zob0dg9bvqUNViJ6hBJZk`
-- **OpenAI API Key**: `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`
+
 
 ## Note
 HealthyYYC also offers a mobile application version for users preferring mobile devices. For further inquiries or assistance, please contact our team.
