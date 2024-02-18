@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="../Styles/homePageStyle.css">
+    <link rel="icon" type="image/x-icon" href="../Image/favicon.ico">
+    <script src="scripts.js"></script>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="../Pages/HomePage.html" id="Current-Page"><img src="../Image/Active Home.png" alt="Orange House Icon">Home</a>
+                </li>
+                <li><a href="../Pages/explore.html"><img src="../Image/Searching.png" alt="White Searching Icon">Explore</a></li>
+                <li><a href="../Pages/Profile.html"><img src="../Image/Profile.png" alt="White Profile Icon">Profile</a>
+                </li>
+                <li><a href="../Pages/HealthAssistant.html"><img src="../Image/InstaRec.png"
+                        alt="White Profile Icon">InstaRecipe</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div id="addressInfo" class="Location-Image">
+            <img src="../Image/Location Icon.png" alt="Map Symbol">
+        </div>
+        <div> </div>
+        <h3>Browse Categories</h3>
+        <section id="category">
+            <ul>
+                <li><a href="#"><img src="../Image/Breakfast.jpg" alt="">Breakfast</a></li>
+                <li><a href="#"><img src="../Image/Lunch.jpg" alt="">Lunch</a></li>
+                <li><a href="#"><img src="../Image/Snacks.jpg" alt="">Snacks</a></li>
+                <li><a href="#"><img src="../Image/Dinner.jpg" alt="">Dinner</a></li>
+                <li><a href="#"><img src="../Image/Authentic.jpg" alt="">Authentic</a></li>
+                <li><a href="#"><img src="../Image/Grocery.jpg" alt="">Grocery</a></li>
+            </ul>
+        </section>
+        <h3>Special Offers</h3>
+        <section id="special-offers">
+            <a href="">
+                <img src="../Image/Sale Offer.png" alt="Sale Offer">
+            </a>
+        </section>
+
+        <h3>Businesses Near You</h3>
+        <section id="nearby-businesses">
+            <ul id="business-list"></ul>
+            <div class="business-overlay">
+                <a href="#" id="Restaurant-Info">
+                    <img src="../Image/Restaurant.jpg" alt="restaurant">
+                    <h4>[name]</h4>
+                    <p>[desc]</p>
+                </a>
+                <div>
+                    <img src="../Image/Star.png" alt="Star">
+                    <p>[rating] Rating</p>
+                </div>
+                <div class="Location-Image">
+                    <img src="../Image/Location Icon.png" alt="Map Symbol">
+                        <p>[distance] Km</p>
+                </div>
+            </div>
+
+        </section>
+    </main>
+    <footer>
+        <p>© HealthyYYC 2023</p>
+    </footer>
+
+    <script>
+        // Function to get the user's current position and display the address
+        function showCurrentLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    var pos = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+
+                    // Reverse geocoding to get the address
+                    var geocoder = new google.maps.Geocoder();
+                    geocoder.geocode({ 'location': pos }, function (results, status) {
+                        if (status === 'OK') {
+                            if (results[0]) {
+                                var address = results[0].formatted_address;
+                                document.getElementById('addressInfo').innerHTML = '<img src="../Image/Location Icon.png" alt="Map Symbol"><div>' + address + '</div>';
+                            } else {
+                                window.alert('No results found');
+                            }
+                        } else {
+                            window.alert('Geocoder failed due to: ' + status);
+                        }
+                    });
+                }, function () {
+                    // Handle errors
+                    handleLocationError(true);
+                });
+            } else {
+                // Browser doesn't support Geolocation
+                handleLocationError(false);
+            }
+        }
+
+        // Function to handle errors
+        function handleLocationError(browserHasGeolocation) {
+            var errorElement = document.createElement('div');
+            errorElement.textContent = browserHasGeolocation ?
+                'Error: The Geolocation service failed.' :
+                'Error: Your browser doesn\'t support geolocation.';
+            document.body.appendChild(errorElement);
+        }
+
+        // Call the function to show current location on page load
+        showCurrentLocation();
+    </script>
+
+    <!-- Load the Google Maps JavaScript API -->
+    <!-- Add Google API key on ReadMe file here-->
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key= ADD_GOOGLE_API_KEY_HERE &callback=initMap">
+        </script>
+</body>
+
+</html>

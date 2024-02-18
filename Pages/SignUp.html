@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthyHarvest</title>
+    <link rel = "stylesheet" href = "../Styles/style.css">
+    <link rel="icon" type="image/x-icon" href="../Image/favicon.ico">
+</head>
+<body>
+    <div class="auth-screen">
+      <div class="auth-screen__branding">
+        <h1 class="auth-screen__title" id="user-info">Sign Up</h1>
+      </div>
+      <form id="login-form" class="auth-screen__form" action="/auth" method="post">
+        <div class="auth-screen__field">
+            <label class="auth-screen__label" for="username">Username</label>
+            <input class="auth-screen__input" type="username" id="username" name="username" required />
+          </div>
+        <div class="auth-screen__field">
+          <label class="auth-screen__label" for="email">Email</label>
+          <input class="auth-screen__input" type="email" id="email" name="email" required />
+        </div>
+        <div class="auth-screen__field">
+          <label class="auth-screen__label" for="password">Password</label>
+          <input class="auth-screen__input" type="password" id="password" name="password" required />
+        </div>
+        <button class="auth-screen__button" type="submit"><a href="../Pages/HomePage.html">Sign In</a></button>
+      </form>
+    </div>
+    <script>
+      document.getElementById("login-form").addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent the form from submitting
+
+        // Get form values
+        var username = document.getElementById("username").value;
+        var email = document.getElementById("email").value;
+
+        // Store the data in localStorage
+        localStorage.setItem("username", username);
+        localStorage.setItem("email", email);
+
+        // Redirect to Profile Page
+        window.location.href = "../Pages/Homepage.html";
+      });
+    </script>
+
+  </body>
+</html>

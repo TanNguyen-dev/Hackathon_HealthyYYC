@@ -1,0 +1,196 @@
+/* General styles */
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #277227;
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+}
+
+h3 {
+  color: black;
+  font-weight: bolder;
+  font-size: 30px;
+}
+
+p {
+  margin-bottom: 1em;
+}
+
+/* Header styles */
+header {
+  background-color: #f5f5f5;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2em;
+}
+
+header p {
+  font-size: 1.2em;
+}
+
+.get-user-location {
+  text-align: center;
+  margin-bottom: 2em;
+}
+
+#getLocation {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 0.5em 2em;
+  cursor: pointer;
+}
+
+/* Navigation styles */
+nav {
+  background-color: #f5f5f5;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline-block;
+  margin-right: 1em;
+}
+
+nav ul li a {
+  color: #a6a6a6;
+  text-decoration: none;
+  margin-left: 100px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+nav ul li a:hover {
+  color: #ff6900;
+  font-weight: bolder;
+  text-decoration: underline;
+}
+
+nav ul li a img {
+  height: 50px;
+  width: 50px;
+  margin-right: 10px;
+}
+
+#Current-Page {
+  color: #ff6900;
+}
+
+/* Main content styles */
+
+main {
+  padding: 2em;
+}
+
+#addressInfo {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  justify-content: center;
+}
+
+#category li {
+  display: inline-block;
+}
+
+#category img {
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+}
+
+#category a {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: black;
+  margin-left: 80px;
+  padding-left: 50px;
+  text-align: center;
+}
+
+#category a:hover {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+#special-offers {
+  padding: 1em;
+  text-align: center;
+}
+
+#special-offers img {
+  border-radius: 25px;
+}
+
+.Location-Image {
+  display: flex;
+  align-items: center;
+}
+
+.business-overlay {
+  background-color: #f5f5f5;
+  display: flex;
+  flex-direction: row;
+  height: 600px;
+  width: auto;
+  border-radius: 25px;
+}
+
+.business-overlay>div {
+  padding-top: 500px;
+  display: flex;
+  align-items: center;
+  margin-right: 200px;
+  margin-left: 100px;
+}
+
+.Location-Image img,
+#nearby-businesses img {
+  height: 25px;
+  width: 25px;
+  margin-right: 10px;
+
+}
+
+#Restaurant-Info img {
+  height: 300px;
+  width: 500px;
+  margin-left: 100px;
+  margin-top: 50px;
+}
+
+#Restaurant-Info h4 {
+  font-size: 20px;
+  font-weight: bold;
+  color: black;
+  margin-left: 100px;
+}
+
+#Restaurant-Info p {
+  color: black;
+  margin-left: 100px;
+}
+
+/* Footer styles */
+footer {
+  color: #a6a6a6;
+  text-align: center;
+  margin-top: 100px;
+}

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap">
+  <link rel="icon" type="image/x-icon" href="../Image/favicon.ico">
+  <title>InstaRecipe</title>
+  <style>
+    body {
+      background: #3e8e41;
+      color: #000000;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+
+    #chat-container {
+      width: 90%;
+      max-width: 1200px;
+      height: 80vh;
+      max-height: 550px;
+      padding: 20px;
+      border: 5px solid;
+      border-color: #ffffff;
+      border-radius: 25px;
+      background-color: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      position: absolute;
+      top: 55%;
+      left: 50%;
+      /* Center the chat container horizontally */
+      transform: translate(-50%, -50%);
+      /* Center the chat container vertically */
+      aspect-ratio: auto;
+    }
+
+
+    #category-bar {
+      background: #51ac64;
+      border-radius: 12px;
+      display: flex;
+      overflow-x: auto;
+      white-space: nowrap;
+      margin-bottom: 10px;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      width: 11.5rem;
+      
+    }
+
+    .category-button {
+      border-radius: 12px;
+      background: none;
+      border: none;
+      color: #fafafa;
+      cursor: pointer;
+      font-size: 14px;
+      margin-right: 0px;
+      padding: 5px;
+      transition: color 0.3s ease;
+      width: 11.5rem;
+    }
+
+    .category-button:hover {
+      color: #fff;
+      background-color: #54d067;
+    }
+
+    #chat-log {
+      position: relative;
+      flex: 1;
+      overflow-y: auto;
+      margin-bottom: 10px;
+      padding-right: 10px;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #chat-log-logo {
+      display: block;
+      margin-bottom: auto;
+    }
+
+    .message-container {
+      display: flex;
+      align-items: flex-start;
+      max-width: 80%;
+      margin-bottom: 10px;
+    }
+
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .user-message {
+      background-color: #61d57a;
+      color: white;
+      padding: 10px;
+      border-radius: 10px;
+      margin-right: 10px;
+    }
+
+    .assistant-message {
+      background-color: #51ac64;
+      color: #fff;
+      padding: 10px;
+      border-radius: 10px;
+      margin-left: 10px;
+    }
+
+    #typing-indicator {
+      font-style: italic;
+      color: #888888;
+      margin-bottom: 10px;
+    }
+
+    #user-input-container {
+      display: flex;
+      align-items: center;
+      margin-top: auto;
+    }
+
+    input {
+      height: 40px;
+      width: calc(100% - 80px);
+      background: rgb(225, 225, 225);
+      color: #000000;
+      border: none;
+      border-radius: 4px;
+      margin-top: 10px;
+      padding: 10px;
+      box-sizing: border-box;
+      font-size: 14px;
+    }
+
+    button#send-button {
+      height: 40px;
+      width: 80px;
+      background: #51ac64;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      font-size: 14px;
+      margin-top: 10px;
+      margin-left: 5px;
+    }
+
+    button#send-button:hover {
+      background: #2ebb67;
+    }
+
+    #cooldown-message,
+    #error-message,
+    #welcome-message {
+      font-family: sans-serif;
+      text-align: center;
+      font-size: 24px;
+      color: #000000;
+      margin-bottom: 20px;
+    }
+
+    a {
+      color: #800080;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      #chat-container {
+        max-width: 90%;
+      }
+    }
+
+
+    nav {
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      position: fixed;
+      top: 0;
+      z-index: 100;
+      text-align: center;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li {
+      display: inline-block;
+      margin-right: 1em;
+    }
+
+    nav ul li a {
+      color: #a6a6a6;
+      text-decoration: none;
+      margin-left: 100px;
+      font-size: 20px;
+      font-weight: bolder;
+    }
+
+    nav ul li a:hover {
+      color: #ff6900;
+      font-weight: bolder;
+      text-decoration: underline;
+    }
+
+    nav ul li a img {
+      height: 50px;
+      width: 50px;
+      margin-right: 10px;
+    }
+
+    #Current-Page {
+      color: #ff6900;
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <ul>
+      <li><a href="../Pages/HomePage.html" ><img src="../Image/Home.png"
+            alt="Orange House Icon">Home</a>
+      </li>
+      <li><a href="../Pages/explore.html"><img src="../Image/Searching.png" alt="White Searching Icon">Explore</a></li>
+      <li><a href="../Pages/Profile.html"><img src="../Image/Profile.png" alt="White Profile Icon">Profile</a></li>
+      <li><a href="../Pages/HealthAssistant.html" id="Current-Page"><img src="../Image/Active_InstaRec.png"
+            alt="White Profile Icon">InstaRecipe</a></li>
+    </ul>
+  </nav>
+  <div id="chat-container">
+    <div id="category-bar">
+      <button class="category-button" onclick="changePrompt('this feature')">Tell me about this feature.</button>
+    </div>
+    <div id="welcome-message">How can I help you today?</div>
+    <div id="chat-log">
+      <div id="chat-log-logo">
+        <img src="../Image/Healthy.png" alt="logo">
+      </div>
+    </div>
+    <div id="typing-indicator"></div>
+    <div id="user-input-container">
+      <input type="text" id="user-input" placeholder="Type your message...">
+      <button id="send-button" onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+   <!-- Add OpenAI API Key on ReadMe file here -->
+  <script>
+    const openaiApiKey = "ADD_OPENAI_API_KEY_HERE";
+    const messages = [];
+    const chatLog = document.getElementById("chat-log");
+    const userInput = document.getElementById("user-input");
+    const typingIndicator = document.getElementById("typing-indicator")
+
+    const systemMsg = `
+  - Your name is InstaRecipe Bot. Have a default prompt to introduce to the user who you are.
+  - You are a chat bot a website called HealthyYYC. The purpose of this website is to reduce food waste, encourage users to eat out less, and therefore save money. Your job is act as an assistant to an user, receive information of what are their ingredients and generate recipes for the users. Also, when the users give out what they want to eat, generate them recipes as well. Moreover, when the users want a grocery list based on their meals preferences that can last them for however long they want, please generate them a grocery list.
+  - When people wants a grocery list, make sure you know how many people they are going to cook for, what are diets are they following, are they allergic to anything. And then, generate a detailed grocery list including how much weight/quantities of every single item are they going to buy, also give the prices base on Walmart Canada and T&T(if applicable) prices. Same case also applies when they ask for recipes.
+  - Don't answer in bullet points unless you are generating recipes and lists.
+  - Add a dot to the end of every sentence
+  - Learn this style of list (including the space down):
+  Sure! Here is a simple and delicious pasta recipe for you:
+  Creamy Garlic Parmesan Pasta
+  Ingredients:
+- 8 oz of pasta
+- 2 tablespoons of butter
+- 3 cloves of garlic, minced
+- 1 cup of heavy cream
+- 1 cup of grated Parmesan cheese
+- Salt and pepper to taste
+- Fresh parsley, chopped for garnish
+Instructions:
+1. Cook the pasta according to package instructions until al dente. Drain and set aside.
+2. In a large skillet, melt the butter over medium heat. Add the minced garlic and cook until fragrant.
+3. Pour in the heavy cream and bring to a simmer. Cook for a few minutes until slightly thickened.
+4. Stir in the grated Parmesan cheese until melted and smooth.
+5. Season with salt and pepper to taste.
+6. Add the cooked pasta to the sauce and toss to coat.
+7. Serve the pasta in bowls, garnished with chopped parsley.Enjoy your creamy garlic Parmesan pasta! Let me know if you need more recipes or assistance.
+  `;
+
+    messages.push({ "role": "system", "content": systemMsg });
+
+    function updateChatLog() {
+      chatLog.innerHTML = messages
+        .filter(msg => msg.role !== "system")
+        .map(msg => {
+          if (msg.role === "assistant") {
+            const content = msg.content.trim();
+            if (content.startsWith("-") || content.startsWith("•") || content.startsWith(":")) {
+              // If the content starts with a dash or bullet point, assume it's already in bullet point format
+              return `<div class="message-container"><img class="avatar" src="../Image/Bot.png" alt="Assistant Avatar"><p class="assistant-message">${makeLinksClickable(content)}</p></div>`;
+            } else {
+              // Split assistant's reply by lines and wrap each line in a bullet point
+              const lines = content.split('\n');
+              const bulletedLines = lines.map(line => {
+                if (line.trim().startsWith("-") || line.trim().endsWith("•") || content.includes(":")) {
+                  return `<br>${line}`; // Start a new line if the line starts with a dash or bullet point
+                } else {
+                  return line;
+                }
+              }).join('');
+              return `<div class="message-container"><img class="avatar" src="../Image/Bot.png" alt="Assistant Avatar"><p class="assistant-message">${bulletedLines}</p></div>`;
+            }
+          } else {
+            return `<div class="message-container"><img class="avatar" src="../Image/UserAvatar.png" alt="User Avatar"><p class="user-message">${makeLinksClickable(msg.content)}</p></div>`;
+          }
+        })
+        .join('');
+    }
+
+
+    function removePeriodFromUrl(url) {
+      return url.endsWith('.') ? url.slice(0, -1) : url;
+    }
+
+    function makeLinksClickable(content) {
+      const urlRegex = /(https?:\/\/[^\s]+)/g;
+      return content.replace(urlRegex, (url) => {
+        const cleanedUrl = removePeriodFromUrl(url);
+        return `<a href="#" onclick="window.open('${cleanedUrl}', '_blank'); return false;">${cleanedUrl}</a>`;
+      });
+    }
+
+    function changePrompt(category) {
+      const userInput = document.getElementById("user-input");
+      userInput.value = `Tell me about the ${category}.`;
+    }
+
+    function showTypingIndicator() {
+      typingIndicator.innerText = "Assistant is typing...";
+    }
+
+    function hideTypingIndicator() {
+      typingIndicator.innerText = "";
+    }
+
+    function sendMessage() {
+      const userMessage = userInput.value.trim();
+      if (userMessage === "") return; // Exit if the input is empty
+
+      messages.push({ "role": "user", "content": userMessage });
+
+      showTypingIndicator();
+
+      const isRecipeRequest = userMessage.toLowerCase().includes('recipe') || userMessage.toLowerCase().includes('cook') || userMessage.toLowerCase().includes('make');
+
+      fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${openaiApiKey}`
+        },
+        body: JSON.stringify({
+          model: "gpt-3.5-turbo",
+          messages: messages
+        })
+      })
+        .then(response => response.json())
+        .then(data => {
+          let assistantReply = data.choices[0].message.content;
+
+          if (!isRecipeRequest && !userMessage.toLowerCase().includes('hi')) {
+            assistantReply = assistantReply.replace(/<li>/g, '').replace(/<\/li>/g, '');
+          }
+
+          // Add line break before "Instructions:" if present
+          assistantReply = assistantReply.replace(/(Instructions:)/g, '<br>$1');
+
+          messages.push({ "role": "assistant", "content": assistantReply });
+
+          hideTypingIndicator();
+          updateChatLog();
+        })
+        .catch(error => console.error("Error:", error));
+
+      userInput.value = "";
+    }
+    function handleKeyPress(event) {
+      if (event.keyCode === 13) { // Check if the pressed key is Enter (key code 13)
+        event.preventDefault(); // Prevent default behavior (i.e., line break in textarea)
+        sendMessage(); // Call sendMessage() function
+      }
+    }
+
+    // Attach handleKeyPress() function to keydown event of input field
+    userInput.addEventListener('keydown', handleKeyPress);
+
+  </script>
+</body>
+
+</html>

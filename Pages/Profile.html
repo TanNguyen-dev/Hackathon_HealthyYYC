@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../Styles/profileStyle.css">
+  <link rel="icon" type="image/x-icon" href="../Image/favicon.ico">
+
+  <title>Profile</title>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="../Pages/HomePage.html" ><img src="../Image/Home.png" alt="White House Icon">Home</a></li>
+        <li><a href="../Pages/explore.html"><img src="../Image/Searching.png" alt="White Searching Icon">Explore</a></li>
+        <li><a href="../Pages/Profile.html" id="Current-Page"><img src="../Image/Active Profile.png" alt="White Profile Icon">Profile</a></li>
+        <li><a href="../Pages/HealthAssistant.html"><img src="../Image/InstaRec.png" alt="White Bowl Icon">InstaRecipe</a></li>
+      </ul>
+    </nav>
+    <div class="Flex">
+      <div class="user-info" id="user-info"></div>
+      <div class="link1" id="user-info"><a href="LogIn.html"></a>
+      <div><img src="../Image/Avatar.png" alt="User Avatar"></div>
+      </div>
+    </div>
+  </header>
+  <main>
+    <div class="profile-settings">
+       <p>Profile Setting</p>
+      <button class="edit-profile">Edit Profile</button>
+      <button class="food-booking-history">Food Booking History</button>
+      <button class="switch-to-business-profile">Switch to Business Profile</button>
+      <button class="about-app">About App</button>
+    </div>
+    <a href="../Pages/LogIn.html" id="Flex-Button">
+      <button class="logout-button">Logout</button>
+    </a>
+
+  </main>
+  <script>
+    // Retrieve data from localStorage
+    var username = localStorage.getItem("username")
+    var email = localStorage.getItem("email");
+
+    // Display the user information
+    var userInfo = document.getElementById("user-info");
+    userInfo.innerHTML = "Hi, " + username + "<br/>" + "Email: " + email
+  </script>
+</body>
+</html>
